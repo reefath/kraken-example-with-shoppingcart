@@ -1,21 +1,18 @@
 /*global describe:false, it:false, beforeEach:false, afterEach:false*/
 
-'use strict';
-
-
-var kraken = require('kraken-js'),
-    express = require('express'),
-    request = require('supertest'),
-    path = require('path'),
-    spec = require('../lib/spec');
+import kraken from 'kraken-js';
+import express from 'express';
+import request from 'supertest';
+import path from 'path';
+import spec from '../lib/spec';
 
 
 describe('/', function () {
 
-    var app, mock;
+    let app, mock;
 
 
-    beforeEach(function (done) {
+    beforeEach((done) => {
         app = express();
         app.on('start', done);
         app.use(kraken({
@@ -28,12 +25,12 @@ describe('/', function () {
     });
 
 
-    afterEach(function (done) {
+    afterEach( (done) =>{
         mock.close(done);
     });
 
 
-    it('should say "Welcome to the Kraken Store."', function (done) {
+    it('should say "Welcome to the Kraken Store."', (done) =>{
         request(mock)
             .get('/')
             .expect(200)

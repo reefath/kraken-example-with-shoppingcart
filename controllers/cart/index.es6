@@ -1,5 +1,3 @@
-'use strict';
-
 import Product from '../../models/productModel';
 import getBundle from '../../lib/getBundle';
 
