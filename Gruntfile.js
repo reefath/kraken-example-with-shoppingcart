@@ -9,8 +9,9 @@ module.exports = function (grunt) {
     });
 
     // Register group tasks
-    grunt.registerTask('build', [ 'jshint', 'less', 'i18n', 'copyto' ]);
-    grunt.registerTask('test', [ 'eslint', 'mochaTest']);
-    grunt.registerTask('lint', [ 'eslint']);
+    grunt.registerTask('build', ['jshint', 'less', 'i18n', 'copyto']);
+    grunt.registerTask('test', ['mochaTest']);
+    grunt.registerTask('lint', ['eslint']);
+    grunt.registerTask('coverage', ['babel', 'mocha_istanbul', 'clean:babel']);
 
 };

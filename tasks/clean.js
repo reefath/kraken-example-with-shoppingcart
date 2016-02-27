@@ -2,12 +2,14 @@
 
 
 module.exports = function clean(grunt) {
-	// Load task
-	grunt.loadNpmTasks('grunt-contrib-clean');
+	var es6files = grunt.file.expand({}, '**/*.es6').map(function(file) {
+        return file.replace('.es6', '.js');
+    });
 
-	// Options
-	return {
-	    tmp: 'tmp',
-	    build: '.build/templates'
-	};
+    return {
+        tmp: 'tmp',
+        build: '.build/templates',
+        reports: 'coverage',
+        babel: es6files
+    };
 };
