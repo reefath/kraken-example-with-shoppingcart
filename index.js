@@ -1,6 +1,11 @@
 'use strict';
 
 
+require('babel-polyfill');
+require('babel-register') ({
+    extensions: ['.es6']
+});
+
 var kraken = require('kraken-js'),
     app = require('express')(),
     options = require('./lib/spec')(),

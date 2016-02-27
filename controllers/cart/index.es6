@@ -1,22 +1,23 @@
 'use strict';
-var Product = require('../../models/productModel');
-var getBundle = require('../../lib/getBundle');
+
+import Product from '../../models/productModel';
+import getBundle from '../../lib/getBundle';
 
 module.exports = function (router) {
 
 	/**
 	 * Display the shopping cart
 	 */
-	router.get('/', getBundle, function (req, res) {
+	router.get('/', getBundle, (req, res) =>{
 
 		//Retrieve the shopping cart from memory
-		var cart = req.session.cart,
-			displayCart = {items: [], total: 0},
+		const cart = req.session.cart;
+		let	displayCart = {items: [], total: 0},
 			total = 0;
-		var locals = res.locals;
-		var i18n = res.app.kraken.get('i18n');
-		var locality = locals && locals.context && locals.context.locality || i18n.fallback;
-		var cartLength;
+		const locals = res.locals;
+        const i18n = res.app.kraken.get('i18n');
+        const locality = locals && locals.context && locals.context.locality || i18n.fallback;
+		let cartLength;
 		if (!cart) {
 			res.bundle.get({'bundle': 'messages', 'model': {}, 'locality': locality}, function bundleReturn(err, messages) {
 				res.render('result', {result: messages.empty, continueMessage: messages.keepShopping});
@@ -26,13 +27,13 @@ module.exports = function (router) {
 		}
 
 		//Ready the products for display
-		for (var item in cart) {
+		for (let item in cart) {
 			displayCart.items.push(cart[item]);
 			total += (cart[item].qty * cart[item].price);
 		}
 		req.session.total = displayCart.total = total.toFixed(2);
 		cartLength = Object.keys(cart).length;
-		var model =
+		let model =
 		{
 			cart: displayCart
 		};
@@ -46,17 +47,17 @@ module.exports = function (router) {
 	/**
 	 * Add an item to the shopping cart
 	 */
-	router.post('/', function (req, res) {
+	router.post('/', (req, res) =>{
 
 		//Load (or initialize) the cart
 		req.session.cart = req.session.cart || {};
-		var cart = req.session.cart;
+		const cart = req.session.cart;
 
 		//Read the incoming product data
-		var id = req.param('item_id');
+		const id = req.param('item_id');
 
 		//Locate the product to be added
-		Product.findById(id, function (err, prod) {
+		Product.findById(id, (err, prod)=> {
 			if (err) {
 				console.log('Error adding product to cart: ', err);
 				res.redirect('/cart');
