@@ -1,10 +1,10 @@
 /*global describe:false, it:false, beforeEach:false, afterEach:false*/
 
-import kraken from 'kraken-js';
-import express from 'express';
-import request from 'supertest';
-import path from 'path';
-import spec from '../lib/spec';
+let kraken = require('kraken-js'),
+    express = require('express'),
+    request = require('supertest'),
+    path = require('path'),
+    spec = require('../lib/spec');
 
 
 describe('/', function () {

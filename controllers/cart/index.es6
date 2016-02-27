@@ -1,5 +1,5 @@
-import Product from '../../models/productModel';
-import getBundle from '../../lib/getBundle';
+let Product = require('../../models/productModel');
+let getBundle = require('../../lib/getBundle');
 
 module.exports = function (router) {
 

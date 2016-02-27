@@ -10,6 +10,7 @@ module.exports = function (grunt) {
 
     // Register group tasks
     grunt.registerTask('build', [ 'jshint', 'less', 'i18n', 'copyto' ]);
-    grunt.registerTask('test', [ 'jshint', 'mochaTest']);
+    grunt.registerTask('test', [ 'eslint', 'mochaTest']);
+    grunt.registerTask('lint', [ 'eslint']);
 
 };
